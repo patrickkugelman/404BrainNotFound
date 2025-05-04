@@ -1,0 +1,28 @@
+
+<div class="flex items-center gap-2 p-2 text-sm bg-background/80 backdrop-blur-sm rounded-lg border border-muted">
+  <div class="flex flex-col">
+    <span class="font-medium">AI Party Updates</span>
+    <span class="text-xs text-muted-foreground">
+      Last updated: {{ lastUpdate.lastUpdated === "never" ? "Never" : (lastUpdate.lastUpdated | date) }}
+    </span>
+  </div>
+  <button 
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+    [disabled]="isUpdating"
+    (click)="handleManualUpdate()"
+  >
+    <svg *ngIf="isUpdating" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 animate-spin">
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+      <path d="M21 3v5h-5"></path>
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+      <path d="M3 21v-5h5"></path>
+    </svg>
+    <svg *ngIf="!isUpdating" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2">
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+      <path d="M21 3v5h-5"></path>
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+      <path d="M3 21v-5h5"></path>
+    </svg>
+    {{ isUpdating ? "Updating..." : "Update Now" }}
+  </button>
+</div>

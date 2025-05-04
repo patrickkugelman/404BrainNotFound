@@ -1,0 +1,6 @@
+@PartyMapster_HostAddress = https://cluj-party-mapster.lovable.app
+
+GET {{PartyMapster_HostAddress}}/api/partymapster
+Accept: application/json
+
+###

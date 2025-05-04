@@ -1,0 +1,24 @@
+# Visual Studio files
+.vs/
+*.vsidx
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
