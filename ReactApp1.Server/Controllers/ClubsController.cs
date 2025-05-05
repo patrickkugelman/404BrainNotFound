@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReactApp1.Server.Models;
+using ReactApp1.Server.Data;
 
 namespace ReactApp1.Server.Controllers
 {
@@ -7,70 +9,100 @@ namespace ReactApp1.Server.Controllers
     [Route("api/[controller]")]
     public class ClubsController : ControllerBase
     {
-        private static List<Club> _clubs = new List<Club>
-        {
-            new Club
-            {
-                Id = "1",
-                Name = "NOA Club & Restaurant",
-                Description = "Upscale club with a great atmosphere and music.",
-                Address = "Str. Republicii 109, Cluj-Napoca",
-                Latitude = 46.7688,
-                Longitude = 23.5994,
-                ActiveParty = true,
-                Rating = 4.5,
-                OpeningHours = "22:00 - 05:00",
-                ImageUrl = "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-                MusicGenre = "House, Pop, Commercial", // Fixed: Changed List<string> to a single string
-                PartyType = "Regular"
-            },
-            new Club
-            {
-                Id = "2",
-                Name = "Form Space",
-                Description = "Popular venue for electronic music events.",
-                Address = "Str. Horea 4, Cluj-Napoca",
-                Latitude = 46.7710,
-                Longitude = 23.5794,
-                ActiveParty = true,
-                Rating = 4.7,
-                OpeningHours = "23:00 - 06:00",
-                ImageUrl = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-                MusicGenre = "Techno, EDM, Drum and Bass", // Fixed: Changed List<string> to a single string
-                PartyType = "EDM"
-            }
-        };
+        private readonly AppDbContext _context;
 
-        public static List<Club> Clubs { get => _clubs; set => _clubs = value; }
-
-        [HttpGet]
-        public ActionResult<IEnumerable<Club>> GetClubs()
+        public ClubsController(AppDbContext context)
         {
-            return Ok(Clubs);
+            _context = context;
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Club> GetClub(string id)
+        // GET: api/clubs
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Club>>> GetClubs()
         {
-            var club = Clubs.FirstOrDefault(c => c.Id == id);
+            return Ok(await _context.Clubs.ToListAsync());
+        }
+
+        // GET: api/clubs/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Club>> GetClub(string id)
+        {
+            var club = await _context.Clubs.FindAsync(id);
             if (club == null)
                 return NotFound();
-
             return Ok(club);
         }
 
+        // GET: api/clubs/by-genre/{genre}
         [HttpGet("by-genre/{genre}")]
-        public ActionResult<IEnumerable<Club>> GetClubsByGenre(string genre)
+        public async Task<ActionResult<IEnumerable<Club>>> GetClubsByGenre(string genre)
         {
-            var clubs = Clubs.Where(c => c.MusicGenre.Contains(genre, StringComparison.OrdinalIgnoreCase)).ToList(); // Fixed: Adjusted to check if genre is contained in the string
+            var clubs = await _context.Clubs
+                .Where(c => c.MusicGenre.Contains(genre))
+                .ToListAsync();
             return Ok(clubs);
         }
 
+        // GET: api/clubs/by-party-type/{partyType}
         [HttpGet("by-party-type/{partyType}")]
-        public ActionResult<IEnumerable<Club>> GetClubsByPartyType(string partyType)
+        public async Task<ActionResult<IEnumerable<Club>>> GetClubsByPartyType(string partyType)
         {
-            var clubs = Clubs.Where(c => c.PartyType.Equals(partyType, StringComparison.OrdinalIgnoreCase)).ToList();
+            var clubs = await _context.Clubs
+                .Where(c => c.PartyType.Equals(partyType, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
             return Ok(clubs);
+        }
+
+        // POST: api/clubs
+        [HttpPost]
+        public async Task<ActionResult<Club>> CreateClub([FromBody] Club club)
+        {
+            club.Id = Guid.NewGuid().ToString();
+            _context.Clubs.Add(club);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetClub), new { id = club.Id }, club);
+        }
+
+        // PUT: api/clubs/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateClub(string id, [FromBody] Club club)
+        {
+            if (id != club.Id)
+                return BadRequest();
+
+            var existingClub = await _context.Clubs.FindAsync(id);
+            if (existingClub == null)
+                return NotFound();
+
+            // Update properties
+            existingClub.Name = club.Name;
+            existingClub.Address = club.Address;
+            existingClub.Latitude = club.Latitude;
+            existingClub.Longitude = club.Longitude;
+            existingClub.MusicGenre = club.MusicGenre;
+            existingClub.PartyType = club.PartyType;
+            existingClub.Description = club.Description;
+            existingClub.ImageUrl = club.ImageUrl;
+            existingClub.Rating = club.Rating;
+            existingClub.OpeningHours = club.OpeningHours;
+            existingClub.ActiveParty = club.ActiveParty;
+            existingClub.IsFavorite = club.IsFavorite;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/clubs/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClub(string id)
+        {
+            var club = await _context.Clubs.FindAsync(id);
+            if (club == null)
+                return NotFound();
+
+            _context.Clubs.Remove(club);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
