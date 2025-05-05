@@ -10,7 +10,7 @@ export interface Club {
   rating: string;
   openingHours: string;
   image?: string;
-  musicGenres: string;
+  musicGenres: string[];
   partyType: "Regular" | "Students" | "Themed" | "Live Music" | "EDM";
 }
 
@@ -27,7 +27,7 @@ export const clubData: Club[] = [
     rating: "4.5",
     openingHours: "22:00 - 05:00",
     image: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "House, Pop, Commercial",
+    musicGenres: ["House", "Pop", "Commercial"],
     partyType: "Regular"
   },
   {
@@ -41,7 +41,7 @@ export const clubData: Club[] = [
     rating: "4.7",
     openingHours: "23:00 - 06:00",
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Techno, EDM, Drum and Bass",
+    musicGenres: ["Techno", "EDM", "Drum and Bass"],
     partyType: "EDM"
   },
   {
@@ -55,7 +55,7 @@ export const clubData: Club[] = [
     rating: "4.7",
     openingHours: "21:00 - 04:00",
     image: "https://images.unsplash.com/photo-1578736641330-3155e606cd40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "R&B, Hip Hop, Reggaeton",
+    musicGenres: ["R&B", "Hip Hop", "Reggaeton"],
     partyType: "Themed"
   },
   {
@@ -69,7 +69,7 @@ export const clubData: Club[] = [
     rating: "4.2",
     openingHours: "22:00 - 05:00",
     image: "https://images.unsplash.com/photo-1571204829887-3b8d69e4094d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Retro, 80s, 90s, 2000s",
+    musicGenres: ["Retro", "80s", "90s", "2000s"],
     partyType: "Students"
   },
   {
@@ -83,7 +83,7 @@ export const clubData: Club[] = [
     rating: "4.4",
     openingHours: "20:00 - 03:00",
     image: "https://images.unsplash.com/photo-1516450360452-9312f5463ebf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Rock, Indie, Alternative",
+    musicGenres: ["Rock", "Indie", "Alternative"],
     partyType: "Live Music"
   },
   {
@@ -97,7 +97,7 @@ export const clubData: Club[] = [
     rating: "4.1",
     openingHours: "22:00 - 05:00",
     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Disco, Funk, Dance",
+    musicGenres: ["Disco", "Funk", "Dance"],
     partyType: "Regular"
   },
   {
@@ -111,7 +111,7 @@ export const clubData: Club[] = [
     rating: "4.8",
     openingHours: "23:00 - 06:00",
     image: "https://images.unsplash.com/photo-1581325649603-7367f6280d5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Techno, House, Minimal",
+    musicGenres: ["Techno", "House", "Minimal"],
     partyType: "EDM"
   },
   // New clubs on strada Piezisa
@@ -126,7 +126,7 @@ export const clubData: Club[] = [
     rating: "4.6",
     openingHours: "22:00 - 06:00",
     image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "House, Electronic, Pop",
+    musicGenres: ["House", "Electronic", "Pop"],
     partyType: "Regular"
   },
   {
@@ -140,7 +140,7 @@ export const clubData: Club[] = [
     rating: "4.4",
     openingHours: "20:00 - 04:00",
     image: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Funk, Soul, Disco",
+    musicGenres: ["Funk", "Soul", "Disco"],
     partyType: "Regular"
   },
   {
@@ -154,7 +154,7 @@ export const clubData: Club[] = [
     rating: "4.9",
     openingHours: "21:00 - 05:00",
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Deep House, Lounge, Ambient",
+    musicGenres: ["Deep House", "Lounge", "Ambient"],
     partyType: "Themed"
   },
   {
@@ -168,7 +168,7 @@ export const clubData: Club[] = [
     rating: "4.2",
     openingHours: "22:30 - 05:30",
     image: "https://images.unsplash.com/photo-1603766806347-25e4b5e3d7f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Hip Hop, Trap, R&B",
+    musicGenres: ["Hip Hop", "Trap", "R&B"],
     partyType: "Students"
   },
   {
@@ -182,7 +182,7 @@ export const clubData: Club[] = [
     rating: "4.7",
     openingHours: "19:00 - 02:00",
     image: "https://images.unsplash.com/photo-1574391573318-e3bcd4fa44b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Jazz, Blues, Acoustic",
+    musicGenres: ["Jazz", "Blues", "Acoustic"],
     partyType: "Live Music"
   },
   {
@@ -196,7 +196,7 @@ export const clubData: Club[] = [
     rating: "4.5",
     openingHours: "23:00 - 07:00",
     image: "https://images.unsplash.com/photo-1583244532610-9ddb18af77b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Techno, Minimal, Industrial",
+    musicGenres: ["Techno", "Minimal", "Industrial"],
     partyType: "EDM"
   },
   {
@@ -210,7 +210,7 @@ export const clubData: Club[] = [
     rating: "4.3",
     openingHours: "18:00 - 02:00",
     image: "https://images.unsplash.com/photo-1578736641330-3155e606cd40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Chill, Lounge, Acoustic",
+    musicGenres: ["Chill", "Lounge", "Acoustic"],
     partyType: "Regular"
   },
   {
@@ -224,7 +224,7 @@ export const clubData: Club[] = [
     rating: "4.4",
     openingHours: "20:00 - 04:00",
     image: "https://images.unsplash.com/photo-1581325649603-7367f6280d5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Rock, Pop, Alternative",
+    musicGenres: ["Rock", "Pop", "Alternative"],
     partyType: "Regular"
   },
   {
@@ -238,7 +238,7 @@ export const clubData: Club[] = [
     rating: "4.3",
     openingHours: "18:00 - 02:00",
     image: "https://images.unsplash.com/photo-1516450360452-9312f5463ebf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    musicGenres: "Indie, Folk, Acoustic",
+    musicGenres: ["Indie", "Folk", "Acoustic"],
     partyType: "Live Music"
   }
 ];
